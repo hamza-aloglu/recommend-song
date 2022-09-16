@@ -30,5 +30,21 @@ public class ArtistService extends SpotifyService {
         return artistsWithFrequency;
     }
 
+    public Artist findMostRepeatedArtist(Map<String, Integer> artistsWithFrequency) throws IOException, ParseException, SpotifyWebApiException {
+        String mostRepeatedArtistId = null;
+        int maxRepeatedNumber = 0;
+        for (String key : artistsWithFrequency.keySet()) {
+            int artistOccurrence = artistsWithFrequency.get(key);
+
+            if (artistOccurrence > maxRepeatedNumber) {
+                mostRepeatedArtistId = key;
+                maxRepeatedNumber = artistOccurrence;
+            }
+        }
+
+        return spotifyApi.getArtist(mostRepeatedArtistId).build().execute();
+    }
+
     
+
 }
