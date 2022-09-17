@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+    <h1>Demo</h1>
+</header>
+<main>
+    <div class="container">
+        <div id="TrackInputGroup">
+            <input type="text">
+            <input type="text">
+            <input type="text">
+            <input type="text">
+            <input type="text">
+            <button id="FetchTracks">Recommend</button>
+        </div>
+
+        <div id="RecommendationSection">
+            <div class="recommended-song col-3">
+                <a href="">
+                    <img src="https://via.placeholder.com/250" alt="">
+                    <div class="track-name">Lorem ipsum dolor sit amet.</div>
+                </a>
+            </div>
+            <div class="recommended-song col-3">
+                <a href="">
+                    <img src="https://via.placeholder.com/250" alt="">
+                    <div class="track-name">Lorem ipsum dolor sit amet.</div>
+                </a>
+            </div>
+            <div class="recommended-song col-3">
+                <a href="">
+                    <img src="https://via.placeholder.com/250" alt="">
+                    <div class="track-name">Lorem ipsum dolor sit amet.</div>
+                </a>
+            </div>
+        </div>
+    </div>
+</main>
+
+</body>
+
+<script>
+    // add on click event to #FetchTracks
+    const fetchTracksButton = document.getElementById('FetchTracks');
+    fetchTracksButton.addEventListener('click', function () {
+        // get content of track input group's inputs
+        const inputs = document.querySelectorAll('#TrackInputGroup input');
+        let userGivenTrackNames="";
+        inputs.forEach(function (input) {
+            userGivenTrackNames += input.value + ",";
+        });
+        // delete last comma
+        userGivenTrackNames = userGivenTrackNames.slice(0, -1);
+        console.log(userGivenTrackNames);
+
+        console.log('-----------------------------------------');
+
+        // send contents in correct format to fetch recommended tracks
+        async function fetchRecmmendedTracks() {
+            // always try using const rather than let
+            const response = await fetch("http://localhost:8080/tracks", {
+                method: 'POST',
+                body: JSON.stringify(userGivenTrackNames)
+            });
+
+            if (response.ok) {
+                const json = response.json();
+                alert(json);
+                return await json;
+            } else {
+                alert("HTTP response not ok");
+            }
+
+        }
+
+        fetchRecmmendedTracks()
+            .then((data) => {
+                console.log(data); // JSON data parsed by `data.json()` call
+            });
+
+
+
+
+
+    });
+
+    // fill recommendation section with data that came from server.
+    // remove display none property from recommendation section
+</script>
+
+
+</html>
