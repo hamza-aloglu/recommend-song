@@ -1,11 +1,7 @@
 package recommendsong;
 
-import com.neovisionaries.i18n.CountryCode;
 import org.apache.hc.core5.http.ParseException;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
-import se.michaelthelin.spotify.SpotifyApi;
+import org.springframework.web.bind.annotation.*;
 import se.michaelthelin.spotify.exceptions.SpotifyWebApiException;
 import se.michaelthelin.spotify.model_objects.specification.Artist;
 import se.michaelthelin.spotify.model_objects.specification.Track;
@@ -17,7 +13,7 @@ import java.util.*;
 
 @RestController
 public class HomeController {
-
+    @CrossOrigin
     @PostMapping("/tracks")
     List<String> recommendTracks(@RequestBody String trackNames) throws IOException, ParseException, SpotifyWebApiException {
         String[] trackNamesArray = trackNames.split(",");
