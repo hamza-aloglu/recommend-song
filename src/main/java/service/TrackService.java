@@ -14,10 +14,6 @@ public class TrackService extends SpotifyService {
 
         for (String trackName: trackNames) {
             String trackId = this.findTrackIdFromName(trackName);
-
-            if (trackIds.contains(trackId)) {
-                continue;
-            }
             trackIds.add(trackId);
         }
         return trackIds;
@@ -30,5 +26,11 @@ public class TrackService extends SpotifyService {
                 .execute()
                 .getItems()[0]
                 .getId();
+    }
+
+    public Track getTrack(String Id) throws IOException, ParseException, SpotifyWebApiException {
+        return spotifyApi.getTrack(Id)
+                .build()
+                .execute();
     }
 }
