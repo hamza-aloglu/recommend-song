@@ -13,9 +13,19 @@ import java.util.*;
 
 @RestController
 public class HomeController {
+
+    @GetMapping("/trackJson")
+    Track giveMeTrack() throws IOException, ParseException, SpotifyWebApiException {
+        TrackService trackService = new TrackService();
+        String trackId = trackService.findTrackIdFromName("DRE");
+
+        return trackService.getTrack(trackId);
+
+    }
+
     @CrossOrigin
     @PostMapping("/tracks")
-    List<String> recommendTracks(@RequestBody String trackNames) throws IOException, ParseException, SpotifyWebApiException {
+    List<Track> recommendTracks(@RequestBody String trackNames) throws IOException, ParseException, SpotifyWebApiException {
         String[] trackNamesArray = trackNames.split(",");
 
         TrackService trackService = new TrackService();
@@ -30,7 +40,7 @@ public class HomeController {
 
         // Recommendation logic
         // Starting from 100%, chance of recommending next top track will be decreased by half for each top track.
-        List<String> recommendedTracks = new ArrayList<>();
+        List<Track> recommendedTracks = new ArrayList<>();
         int percentChanceForTrackAddition = 100;
 
         for (Track mostRepeatedArtistsTrack : mostRepeatedArtistsTracks) {
@@ -41,7 +51,8 @@ public class HomeController {
 
             // tracks that will be given to user should not be tracks which user gave us.
             if (!userGivenTrackIds.contains(mostRepeatedArtistsTrack.getId()) && randomNumber < percentChanceForTrackAddition) {
-                recommendedTracks.add(mostRepeatedArtistsTrack.getName());
+                recommendedTracks.add(mostRepeatedArtistsTrack);
+                // recommendedTracks.add(mostRepeatedArtistsTrack.getName());
                 percentChanceForTrackAddition /= 2;
             }
         }
