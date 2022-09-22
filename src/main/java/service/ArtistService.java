@@ -53,4 +53,21 @@ public class ArtistService extends SpotifyService {
         Artist[] relatedArtist = spotifyApi.getArtistsRelatedArtists(artist.getId()).build().execute();
         return this.findTopTracks(relatedArtist[0]);
     }
+
+    public Track[] getTopTrackOfRandomArtist(Map<String, Integer> artistWithFrequency, Artist restrictedArtist) throws IOException, ParseException, SpotifyWebApiException {
+        artistWithFrequency.remove(restrictedArtist.getId());
+
+        System.out.println("key set: " + artistWithFrequency.keySet());
+        System.out.println(artistWithFrequency.keySet().isEmpty());
+
+        if (artistWithFrequency.keySet().isEmpty()) {
+            return null;
+        }
+
+        Object[] artistIds = artistWithFrequency.keySet().toArray();
+        int randomIndex = this.generateRandomNumber(0, artistIds.length);
+        Object randomArtistId = artistIds[randomIndex];
+
+        return spotifyApi.getArtistsTopTracks((String)randomArtistId, this.country).build().execute();
+    }
 }
