@@ -40,43 +40,24 @@ public class HomeController {
         //-- Recommendation logic --
 
         List<Track> recommendedTracks = new ArrayList<>();
-        PercentChance trackSelectionMethod = (chance -> chance / 2);
+        PercentChance trackSelectionMethod = (chance -> chance - 15);
 
         // Add 1 top track from most repeated artist.
-        // Starting from 50%, chance of recommending next top track will be decreased by half for each top track.
         Track[] mostRepeatedArtistTopTracks = artistService.findTopTracks(mostRepeatedArtist);
-        Track mostRepeatedArtistTopTrack = this.getRandomTrack(mostRepeatedArtistTopTracks, 75, userGivenTrackIds, trackSelectionMethod);
+        Track mostRepeatedArtistTopTrack = trackService.getRandomTrack(mostRepeatedArtistTopTracks, 75, userGivenTrackIds, trackSelectionMethod);
         if (mostRepeatedArtistTopTrack != null) {
             recommendedTracks.add(mostRepeatedArtistTopTrack);
         }
 
         // Add 1 top track from related artist of most repeated artist
         Track[] relatedArtistTopTracks = artistService.getRelatedArtistTopTracks(mostRepeatedArtist);
-        Track relatedArtistTopTrack = this.getRandomTrack(relatedArtistTopTracks, 75, userGivenTrackIds, trackSelectionMethod);
+        Track relatedArtistTopTrack = trackService.getRandomTrack(relatedArtistTopTracks, 75, userGivenTrackIds, trackSelectionMethod);
         if (relatedArtistTopTrack != null) {
             recommendedTracks.add(relatedArtistTopTrack);
         }
 
+        
 
         return recommendedTracks;
-    }
-
-    private Track getRandomTrack(Track[] tracks, int trackSelectionChance, List<String> restrictedTracksIds, PercentChance trackAdditionChance) {
-        for (Track track : tracks) {
-            int randomNumber = this.generateRandomNumber(0, 100);
-
-            // tracks that will be given to user should not be tracks which user gave us.
-            if (!restrictedTracksIds.contains(track.getId()) && randomNumber < trackSelectionChance) {
-                return track;
-            }
-
-            trackSelectionChance = trackAdditionChance.calculate(trackSelectionChance);
-        }
-        return null;
-    }
-
-    private int generateRandomNumber(int lowerBound, int upperBound) {
-        Random random = new Random();
-        return random.nextInt(lowerBound, upperBound);
     }
 }
