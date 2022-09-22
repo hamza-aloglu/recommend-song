@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 public class ArtistService extends SpotifyService {
-    public Map<String, Integer> getArtistsWithFrequency(List<String> trackIds) throws IOException, ParseException, SpotifyWebApiException {
+    public Map<String, Integer> getArtistIdsWithFrequency(List<String> trackIds) throws IOException, ParseException, SpotifyWebApiException {
         Map<String, Integer> artistsWithFrequency = new HashMap<>();
 
         for (String trackId : trackIds) {

@@ -32,32 +32,23 @@ public class HomeController {
         List<String> userGivenTrackIds = trackService.findTrackIdFromName(trackNamesArray);
 
         ArtistService artistService = new ArtistService();
-        Map<String, Integer> artistsWithFrequency = artistService.getArtistsWithFrequency(userGivenTrackIds);
+        Map<String, Integer> artistIdsWithFrequency = artistService.getArtistIdsWithFrequency(userGivenTrackIds);
 
-        Artist mostRepeatedArtist = artistService.findMostRepeatedArtist(artistsWithFrequency);
-        Track[] mostRepeatedArtistsTracks = artistService.findTopTracks(mostRepeatedArtist);
+        Artist mostRepeatedArtist = artistService.findMostRepeatedArtist(artistIdsWithFrequency);
 
 
-        // Recommendation logic
-        // Starting from 100%, chance of recommending next top track will be decreased by half for each top track.
+        //-- Recommendation logic --
+
         List<Track> recommendedTracks = new ArrayList<>();
-        int percentChanceForTrackAddition = 100;
+        PercentChance trackSelectionMethod = (chance -> chance / 2);
 
-        for (Track mostRepeatedArtistsTrack : mostRepeatedArtistsTracks) {
-            if (recommendedTracks.size() >= 3) {
-                break;
-            }
-            int randomNumber = this.generateRandomNumber(0, 100);
 
-            // tracks that will be given to user should not be tracks which user gave us.
-            if (!userGivenTrackIds.contains(mostRepeatedArtistsTrack.getId()) && randomNumber < percentChanceForTrackAddition) {
-                recommendedTracks.add(mostRepeatedArtistsTrack);
-                // recommendedTracks.add(mostRepeatedArtistsTrack.getName());
-                percentChanceForTrackAddition /= 2;
-            }
-        }
+
+
         return recommendedTracks;
     }
+
+    
 
     private int generateRandomNumber(int lowerBound, int upperBound) {
         Random random = new Random();
