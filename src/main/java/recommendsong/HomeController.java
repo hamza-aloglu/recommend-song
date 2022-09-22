@@ -53,7 +53,7 @@ public class HomeController {
         // Add 1 top track from related artist of most repeated artist
         Track[] relatedArtistTopTracks = artistService.getRelatedArtistTopTracks(mostRepeatedArtist);
         Track relatedArtistTopTrack = this.getRandomTrack(relatedArtistTopTracks, 75, userGivenTrackIds, trackSelectionMethod);
-        if (mostRepeatedArtistTopTrack != null) {
+        if (relatedArtistTopTrack != null) {
             recommendedTracks.add(relatedArtistTopTrack);
         }
 
