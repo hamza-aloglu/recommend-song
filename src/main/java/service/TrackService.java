@@ -1,6 +1,7 @@
 package service;
 
 import org.apache.hc.core5.http.ParseException;
+import recommendsong.PercentChance;
 import se.michaelthelin.spotify.exceptions.SpotifyWebApiException;
 import se.michaelthelin.spotify.model_objects.specification.Track;
 
@@ -33,7 +34,6 @@ public class TrackService extends SpotifyService {
                 .build()
                 .execute();
     }
-<<<<<<< HEAD
 
     public Track getRandomTrack(Track[] tracks, int trackSelectionChance, List<String> restrictedTracksIds, PercentChance trackAdditionChance) {
         if (tracks == null) {
@@ -50,6 +50,4 @@ public class TrackService extends SpotifyService {
         }
         return null;
     }
-=======
->>>>>>> parent of 69a64ab (refactor: move getRandomTrack function to service)
 }
