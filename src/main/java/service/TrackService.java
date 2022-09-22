@@ -1,14 +1,12 @@
 package service;
 
 import org.apache.hc.core5.http.ParseException;
-import recommendsong.PercentChance;
 import se.michaelthelin.spotify.exceptions.SpotifyWebApiException;
 import se.michaelthelin.spotify.model_objects.specification.Track;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class TrackService extends SpotifyService {
     public List<String> findTrackIdFromName(String[] trackNames) throws IOException, ParseException, SpotifyWebApiException {
@@ -35,18 +33,23 @@ public class TrackService extends SpotifyService {
                 .build()
                 .execute();
     }
+<<<<<<< HEAD
 
     public Track getRandomTrack(Track[] tracks, int trackSelectionChance, List<String> restrictedTracksIds, PercentChance trackAdditionChance) {
+        if (tracks == null) {
+            return null;
+        }
+
         for (Track track : tracks) {
             int randomNumber = this.generateRandomNumber(0, 100);
-
             // tracks that will be given to user should not be tracks which user gave us.
             if (!restrictedTracksIds.contains(track.getId()) && randomNumber < trackSelectionChance) {
                 return track;
             }
-
             trackSelectionChance = trackAdditionChance.calculate(trackSelectionChance);
         }
         return null;
     }
+=======
+>>>>>>> parent of 69a64ab (refactor: move getRandomTrack function to service)
 }
