@@ -49,4 +49,8 @@ public class ArtistService extends SpotifyService {
         return spotifyApi.getArtistsTopTracks(artist.getId(), this.country).build().execute();
     }
 
+    public Track[] getRelatedArtistTopTracks(Artist artist) throws IOException, ParseException, SpotifyWebApiException {
+        Artist[] relatedArtist = spotifyApi.getArtistsRelatedArtists(artist.getId()).build().execute();
+        return this.findTopTracks(relatedArtist[0]);
+    }
 }
