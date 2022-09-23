@@ -1,0 +1,54 @@
+:root {
+    --input-border: #8b8a8b;
+    --input-focus-h: 245;
+    --input-focus-s: 100%;
+    --input-focus-l: 42%;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: ghostwhite;
+}
+
+header h1 {
+    text-align: center;
+}
+
+a {
+    text-decoration: none;
+}
+
+.container {
+    width: 1200px;
+    margin: 0 auto;
+}
+
+@media (max-width: 1200px) {
+    .container {
+        width: 900px;
+        margin: 0 auto;
+    }
+}
+
+@media (max-width: 950px) {
+    .container {
+        width: 700px;
+    }
+}
+
+@media (max-width: 700px) {
+    .container {
+        width: 550px;
+    }
+}
+
+@media (max-width: 550px) {
+    .container {
+        width: 300px;
+    }
+}

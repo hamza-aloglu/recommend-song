@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="base-styles.css">
 </head>
 <body>
 <header>
@@ -15,11 +16,13 @@
 <main>
     <div class="container">
         <div id="TrackInputGroup">
-            <input type="text">
-            <input type="text">
-            <input type="text">
-            <input type="text">
-            <input type="text">
+            <input type="text" placeholder="enter a song">
+            <input type="text" placeholder="enter a song">
+            <input type="text" placeholder="enter a song">
+            <input type="text" placeholder="enter a song">
+            <input type="text" placeholder="enter a song">
+        </div>
+        <div class="recommend-button-container">
             <button id="FetchTracks">Recommend</button>
         </div>
 
@@ -83,16 +86,11 @@
                     trackLinks[trackIndex].href = recommendedTracks[trackIndex].externalUrls.externalUrls.spotify;
                 }
 
+                // remove display none property from recommendation section
                 recommendationSection.style.display = 'block';
             });
-
-
-
-
-
     });
 
-    // remove display none property from recommendation section
 </script>
 
 

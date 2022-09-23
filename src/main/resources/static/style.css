@@ -1,14 +1,3 @@
-
-
-header h1 {
-    text-align: center;
-}
-
-.container {
-    width: 1000px;
-    margin: 0 auto;
-}
-
 #RecommendationSection {
     margin: 150px 0;
 }
@@ -17,11 +6,43 @@ header h1 {
     text-align: center;
 }
 
-a {
-    text-decoration: none;
-}
-
 .col-3 {
     display: inline-block;
     width: 33%;
 }
+
+#TrackInputGroup {
+    text-align: center;
+}
+
+.recommend-button-container {
+    text-align: center;
+    margin: 2rem 0;
+}
+
+#FetchTracks {
+    padding: 20px 38px;
+    border-radius: 10px;
+    border-style: none;
+    background-color: #EDE4DD;
+    font-size: 20px;
+    font-family: Serif, fantasy;
+    transition: all 0.6s ease-in-out;
+}
+
+#FetchTracks:hover {
+    padding: 21px 40px;
+    font-size: 23px;
+    cursor: pointer;
+    background-color: #ECDBD8;
+}
+
+input {
+    font-size: max(16px, 1em);
+    padding: 0.25em 0.5em;
+    background-color: #fff;
+    border: 2px solid var(--input-border);
+    border-radius: 4px;
+    margin: 5px 0;
+}
+
