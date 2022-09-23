@@ -79,12 +79,21 @@
                 const trackLinks = document.querySelectorAll('.track-link');
                 const recommendationSection = document.getElementById('RecommendationSection');
 
-                for (let trackIndex = 0; trackIndex < recommendedTracks.length; trackIndex++) {
-                    trackNameDivs[trackIndex].innerHTML = recommendedTracks[trackIndex].name;
-                    console.log(recommendedTracks[trackIndex].album.images[1])
-                    trackImages[trackIndex].src = recommendedTracks[trackIndex].album.images[1].url;
-                    trackLinks[trackIndex].href = recommendedTracks[trackIndex].externalUrls.externalUrls.spotify;
+                console.log(recommendedTracks.length);
+
+                for (let trackIndex = 0; trackIndex < trackImages.length; trackIndex++) {
+                    if (trackIndex < recommendedTracks.length) {
+                        trackNameDivs[trackIndex].innerHTML = recommendedTracks[trackIndex].name;
+                        console.log(recommendedTracks[trackIndex].album.images[1])
+                        trackImages[trackIndex].src = recommendedTracks[trackIndex].album.images[1].url;
+                        trackLinks[trackIndex].href = recommendedTracks[trackIndex].externalUrls.externalUrls.spotify;
+                    }
+                    else {
+                        trackImages[trackIndex].src = "https://via.placeholder.com/300";
+                        trackNameDivs[trackIndex].innerHTML = "not found";
+                    }
                 }
+
 
                 // remove display none property from recommendation section
                 recommendationSection.style.display = 'block';
