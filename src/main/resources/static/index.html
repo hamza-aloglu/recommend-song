@@ -11,7 +11,7 @@
 </head>
 <body>
 <header>
-    <h1>Demo</h1>
+    <h1>Give me 5 songs</h1>
 </header>
 <main>
     <div class="container">
@@ -28,22 +28,28 @@
 
         <div id="RecommendationSection" style="display: none">
             <div class="recommended-song col-3">
-                <a class="track-link" href="" target="_blank">
-                    <img class="track-img" src="https://via.placeholder.com/300" alt="">
-                    <div class="track-name">Lorem ipsum dolor sit amet.</div>
-                </a>
+                <div class="recommended-song-content">
+                    <a class="track-link" href="" target="_blank">
+                        <img class="track-img" src="https://via.placeholder.com/300" alt="">
+                        <div class="track-name">Lorem ipsum dolor sit amet.</div>
+                    </a>
+                </div>
             </div>
             <div class="recommended-song col-3">
-                <a class="track-link" href="" target="_blank">
-                    <img class="track-img" src="https://via.placeholder.com/300" alt="">
-                    <div class="track-name">Lorem ipsum dolor sit amet.</div>
-                </a>
+                <div class="recommended-song-content">
+                    <a class="track-link" href="" target="_blank">
+                        <img class="track-img" src="https://via.placeholder.com/300" alt="">
+                        <div class="track-name">Lorem ipsum dolor sit amet.</div>
+                    </a>
+                </div>
             </div>
             <div class="recommended-song col-3">
-                <a class="track-link" href="" target="_blank">
-                    <img class="track-img" src="https://via.placeholder.com/300" alt="">
-                    <div class="track-name">Lorem ipsum dolor sit amet.</div>
-                </a>
+                <div class="recommended-song-content">
+                    <a class="track-link" href="" target="_blank">
+                        <img class="track-img" src="https://via.placeholder.com/300" alt="">
+                        <div class="track-name">Lorem ipsum dolor sit amet.</div>
+                    </a>
+                </div>
             </div>
         </div>
     </div>
@@ -57,9 +63,10 @@
     // add on click event to #FetchTracks
     const fetchTracksButton = document.getElementById('FetchTracks');
     fetchTracksButton.addEventListener('click', function () {
+        fetchTracksButton.style.cursor = "wait";
         // get content of track input group's inputs
         const inputs = document.querySelectorAll('#TrackInputGroup input');
-        let userGivenTrackNames="";
+        let userGivenTrackNames = "";
         inputs.forEach(function (input) {
             userGivenTrackNames += input.value + ",";
         });
@@ -87,16 +94,15 @@
                         console.log(recommendedTracks[trackIndex].album.images[1])
                         trackImages[trackIndex].src = recommendedTracks[trackIndex].album.images[1].url;
                         trackLinks[trackIndex].href = recommendedTracks[trackIndex].externalUrls.externalUrls.spotify;
-                    }
-                    else {
+                    } else {
                         trackImages[trackIndex].src = "https://via.placeholder.com/300";
                         trackNameDivs[trackIndex].innerHTML = "not found";
                     }
                 }
 
-
                 // remove display none property from recommendation section
                 recommendationSection.style.display = 'block';
+                fetchTracksButton.style.cursor = "pointer"
             });
     });
 

@@ -3,6 +3,8 @@
     --input-focus-h: 245;
     --input-focus-s: 100%;
     --input-focus-l: 42%;
+    --body-color: ghostwhite;
+    --image-width: 300px;
 }
 
 *,
@@ -12,7 +14,11 @@
 }
 
 body {
-    background-color: ghostwhite;
+    background-color: var(--body-color);
+}
+
+header {
+    margin-bottom: 40px;
 }
 
 header h1 {
@@ -28,6 +34,11 @@ a {
     margin: 0 auto;
 }
 
+.col-3 {
+    display: inline-block;
+    width: 33%;
+}
+
 @media (max-width: 1200px) {
     .container {
         width: 900px;
@@ -35,9 +46,14 @@ a {
     }
 }
 
-@media (max-width: 950px) {
+@media (max-width: 970px) {
     .container {
         width: 700px;
+    }
+
+    .col-3 {
+        display: block;
+        margin: 20px auto;
     }
 }
 

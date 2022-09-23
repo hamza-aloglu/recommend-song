@@ -1,16 +1,3 @@
-#RecommendationSection {
-    margin: 150px 0;
-}
-
-.recommended-song {
-    text-align: center;
-}
-
-.col-3 {
-    display: inline-block;
-    width: 33%;
-}
-
 #TrackInputGroup {
     text-align: center;
 }
@@ -46,3 +33,33 @@ input {
     margin: 5px 0;
 }
 
+input:not(textarea) {
+    line-height: 1;
+    height: 2.25rem;
+}
+
+#RecommendationSection {
+    margin-top: 100px;
+}
+
+.recommended-song {
+    text-align: center;
+}
+
+.recommended-song-content {
+    transition: box-shadow 1s;
+    width: var(--image-width);
+}
+
+.recommended-song-content:hover {
+    box-shadow: 0 0 10px black;
+    border: none;
+}
+
+.track-img {
+    width: var(--image-width);
+    height: var(--image-width);
+}
+
+.track-name {
+}
