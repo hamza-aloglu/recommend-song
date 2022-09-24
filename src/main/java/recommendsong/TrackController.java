@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.util.*;
 
 @RestController
-public class HomeController {
+public class TrackController {
     @CrossOrigin
     @PostMapping("/tracks")
     List<Track> recommendTracks(@RequestBody String trackNames) throws IOException, ParseException, SpotifyWebApiException {
