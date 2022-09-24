@@ -26,18 +26,19 @@ public class HomeController {
 
         Artist mostRepeatedArtist = artistService.findMostRepeatedArtist(artistIdsWithFrequency);
 
-        // -- Recommendation logic --
+        // -- Recommendation --
         List<Track> recommendedTracks = new ArrayList<>();
-        PercentChance trackSelectionMethod = (chance -> chance / 2);
+        PercentChance trackSelectionMethod = (chance -> chance - 5);
 
         // Add 1 top track from most repeated artist.
         Track[] mostRepeatedArtistTopTracks = artistService.findTopTracks(mostRepeatedArtist);
-        Track mostRepeatedArtistTopTrack = trackService.getRandomTrack(mostRepeatedArtistTopTracks, 75, userGivenTrackIds, trackSelectionMethod);
+        Track mostRepeatedArtistTopTrack = trackService.getRandomTrack(mostRepeatedArtistTopTracks, 70, userGivenTrackIds, trackSelectionMethod);
         if (mostRepeatedArtistTopTrack != null) {
             recommendedTracks.add(mostRepeatedArtistTopTrack);
         }
 
         // Add 1 top track from related artist of most repeated artist
+        trackSelectionMethod = (chance -> chance - 7);
         Track[] relatedArtistTopTracks = artistService.getRelatedArtistTopTracks(mostRepeatedArtist);
         Track relatedArtistTopTrack = trackService.getRandomTrack(relatedArtistTopTracks, 75, userGivenTrackIds, trackSelectionMethod);
         if (relatedArtistTopTrack != null) {
@@ -45,8 +46,9 @@ public class HomeController {
         }
 
         // Add 1 top track from random artist's top track.
+        trackSelectionMethod = (chance -> chance + 10);
         Track[] topTracksOfRandomArtist = artistService.getTopTrackOfRandomArtist(artistIdsWithFrequency, mostRepeatedArtist);
-        Track randomArtistTopTrack = trackService.getRandomTrack(topTracksOfRandomArtist, 75, userGivenTrackIds, trackSelectionMethod);
+        Track randomArtistTopTrack = trackService.getRandomTrack(topTracksOfRandomArtist, 50, userGivenTrackIds, trackSelectionMethod);
         if (randomArtistTopTrack != null) {
             recommendedTracks.add(randomArtistTopTrack);
         }
