@@ -12,7 +12,7 @@ public abstract class SpotifyService {
      * with that code you can get access and refresh token and set it t spotify api and use it. I don't know how long it last
      */
 
-    private final String spotifyAccessToken = "BQC1hS6WhctVbqZ3-8b4m_VeP2OSV2hmN5CLmOy4ru6d17X62U67-ewUPGxZUCtKhWttVamq8565InFg--rshQQDhgJhXBn-Vjh5HnuuSn_5CkZha-GwqvdJxjSiXpZTBIUNjUfmGldfrz6gEXVQoyYcJOiJd-VnBa2uu6QIA9bNTFXKEI4ARGWYUPvn1Rs";
+    private final String spotifyAccessToken = "...";
     protected CountryCode country = CountryCode.TR;
     protected final SpotifyApi spotifyApi = new SpotifyApi.Builder()
             .setAccessToken(this.spotifyAccessToken)
