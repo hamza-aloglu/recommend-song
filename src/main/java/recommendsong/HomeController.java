@@ -13,16 +13,6 @@ import java.util.*;
 
 @RestController
 public class HomeController {
-
-    @GetMapping("/trackJson")
-    Track giveMeTrack() throws IOException, ParseException, SpotifyWebApiException {
-        TrackService trackService = new TrackService();
-        String trackId = trackService.findTrackIdFromName("DRE");
-
-        return trackService.getTrack(trackId);
-
-    }
-
     @CrossOrigin
     @PostMapping("/tracks")
     List<Track> recommendTracks(@RequestBody String trackNames) throws IOException, ParseException, SpotifyWebApiException {
@@ -36,14 +26,11 @@ public class HomeController {
 
         Artist mostRepeatedArtist = artistService.findMostRepeatedArtist(artistIdsWithFrequency);
 
-
-        //-- Recommendation logic --
-
+        // -- Recommendation logic --
         List<Track> recommendedTracks = new ArrayList<>();
         PercentChance trackSelectionMethod = (chance -> chance / 2);
 
         // Add 1 top track from most repeated artist.
-        // Starting from 50%, chance of recommending next top track will be decreased by half for each top track.
         Track[] mostRepeatedArtistTopTracks = artistService.findTopTracks(mostRepeatedArtist);
         Track mostRepeatedArtistTopTrack = trackService.getRandomTrack(mostRepeatedArtistTopTracks, 75, userGivenTrackIds, trackSelectionMethod);
         if (mostRepeatedArtistTopTrack != null) {
@@ -65,11 +52,5 @@ public class HomeController {
         }
 
         return recommendedTracks;
-    }
-
-
-    private int generateRandomNumber(int lowerBound, int upperBound) {
-        Random random = new Random();
-        return random.nextInt(lowerBound, upperBound);
     }
 }

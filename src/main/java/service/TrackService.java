@@ -13,7 +13,7 @@ public class TrackService extends SpotifyService {
     public List<String> findTrackIdFromName(String[] trackNames) throws IOException, ParseException, SpotifyWebApiException {
         List<String> trackIds = new ArrayList<>();
 
-        for (String trackName: trackNames) {
+        for (String trackName : trackNames) {
             String trackId = this.findTrackIdFromName(trackName);
             trackIds.add(trackId);
         }
@@ -35,6 +35,7 @@ public class TrackService extends SpotifyService {
                 .execute();
     }
 
+    // Starting from 50%, chance of recommending next top track will be decreased by half for each top track.
     public Track getRandomTrack(Track[] tracks, int trackSelectionChance, List<String> restrictedTracksIds, PercentChance trackAdditionChance) {
         if (tracks == null) {
             return null;
