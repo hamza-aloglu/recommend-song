@@ -15,11 +15,11 @@ Written [service layer](https://github.com/hamza-aloglu/recommend-song/tree/main
 
 Recommended songs are taken from artists of songs given by the user. At most 3 songs are recommended.
 
-- 1st song is taken from top tracks of most recurred artist among user given track.
-- 2nd song is taken from top tracks of artist which is similar artist with most recurred artist.
-- 3rd song is taken from top tracks of random artist among user given track which is not most recurred artist.
+- 1st song is taken from top songs of most recurred artist among user given songs.
+- 2nd song is taken from top songs of artist which is similar artist with most recurred artist.
+- 3rd song is taken from top songs of random artist among user given songs which is not most recurred artist.
 
-Each song randomly selected from top tracks. Selection method of each track is different and implemented with lambda expression.
+Each song randomly selected from top songs. Selection method of each song is different and implemented with lambda expression.
 
 <br><br><br>
 ------------------------------------------------------------------------------------------------------
